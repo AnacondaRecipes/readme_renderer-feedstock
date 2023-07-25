@@ -17,6 +17,7 @@ requirements:
   host:
     - python
     - pip
+    - wheel
   run:
     - bleach >=2.1.0
     - cmarkgfm >=0.8.0
@@ -25,8 +26,9 @@ requirements:
     - python
 
 test:
-  imports:
+  requires:
     - pip
+  imports:
     - readme_renderer
   source_files:
     - README.rst
