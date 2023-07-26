@@ -11,13 +11,14 @@ source:
 
 build:
   number: 0
-  script: '{{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vvv '
+  script: '{{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv'
 
 requirements:
   host:
     - python
     - pip
     - wheel
+    - setuptools
   run:
     - bleach >=2.1.0
     - cmarkgfm >=0.8.0
@@ -44,7 +45,6 @@ about:
   doc_url: https://github.com/pypa/readme_renderer
   dev_url: https://github.com/pypa/readme_renderer
   description: readme_renderer is a library for rendering readme descriptions for Warehouse
-  documentation: https://pypi.org/project/readme-renderer/
   summary: readme_renderer is a library for rendering readme descriptions for Warehouse
 
 extra:
