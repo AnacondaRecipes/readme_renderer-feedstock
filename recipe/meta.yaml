@@ -11,26 +11,30 @@ source:
 
 build:
   number: 0
-  noarch: python
-  script: '{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv '
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
-    - python >=3.8
+    - python
     - pip
+    - wheel
+    - setuptools
   run:
     - bleach >=2.1.0
     - cmarkgfm >=0.8.0
     - docutils >=0.13.1
     - pygments >=2.5.1
-    - python >=3.8
+    - python
 
 test:
+  requires:
+    - pip
   imports:
     - readme_renderer
   source_files:
     - README.rst
   commands:
+    - pip check
     - python -m readme_renderer README.rst
 
 about:
@@ -38,7 +42,10 @@ about:
   license: Apache-2.0
   license_family: APACHE
   license_file: LICENSE
-  summary: readme_renderer is a library for rendering "readme" descriptions for Warehouse
+  doc_url: https://github.com/pypa/readme_renderer
+  dev_url: https://github.com/pypa/readme_renderer
+  description: readme_renderer is a library for rendering readme descriptions for Warehouse
+  summary: readme_renderer is a library for rendering readme descriptions for Warehouse
 
 extra:
   recipe-maintainers:
