@@ -31,8 +31,8 @@ requirements:
 
 test:
   source_files:
-    - tests
     - README.rst
+    - tests
   imports:
     - readme_renderer
   commands:
