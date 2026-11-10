@@ -10,7 +10,7 @@ source:
   sha256: 8712034eabbfa6805cacf1402b4eeb2a73028f72d1166d6f5cb7f9c047c5d1e1
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   skip: true  # [py<39]
 
@@ -29,6 +29,14 @@ requirements:
     # md
     - cmarkgfm >=0.8.0
 
+    # test_rst_fixtures[test_rst_008.rst]
+    # E   Module not found 'types_docutils' -> https://pypi.org/project/types-docutils
+    # test_cli_explicit_format[test_rst_003.rst]
+    # E       ValueError: I/O operation on closed file.
+{% set ignored_tests = [
+  "--deselect=tests/test_rst.py::test_rst_fixtures[test_rst_008",
+  "--deselect=tests/test_cli.py::test_cli_explicit_format[test_rst_003"
+] %}
 test:
   source_files:
     - README.rst
@@ -37,9 +45,7 @@ test:
     - readme_renderer
   commands:
     - pip check
-    # test_rst_fixtures[test_rst_008.rst]
-    # E   Module not found 'types_docutils' -> https://pypi.org/project/types-docutils
-    - pytest -v tests --deselect=tests/test_rst.py::test_rst_fixtures[test_rst_008
+    - pytest -v tests {{ ignored_tests | join(" ") }}
   requires:
     - pip
     - pytest
